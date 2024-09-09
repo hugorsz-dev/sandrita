@@ -1,0 +1,180 @@
+{
+    "api": {
+        "host": "http://************:21465/api/",
+        "session": "mySession",
+        "headers": {
+            "Authorization": "Bearer ****************"
+        }
+    },
+    "group": {
+        "id": "******************@g.us",
+        "link": "*********************"
+    },
+    "boot": {
+        "active": true,
+        "manual": {
+            "name": "Initialization and Reboot",
+            "description": "Periodic execution of startup scripts, useful for preventing machine cache overload."
+        },
+        "timer_reboot": 50,
+        "time_sleep": 10,
+        "path_to_execute_previusly": "./execute_previusly.sh"
+    },
+    "info": {
+        "active": true,
+        "manual": {
+            "name": "Information Logging",
+            "description": "Collection of WhatsApp information (messages, statistics) on which other modules depend."
+        },
+        "update_messages_per_cycle": 10,
+        "update_messages_at_startup": 50
+    },
+    "spam_detector": {
+        "active": true,
+        "manual": {
+            "name": "SPAM Detector",
+            "description": "Message detection system for identifying SPAM, specifically for WhatsApp groups."
+        },
+        "spam_message_limit_for_alarm": 2,
+        "big_spam_alert_time_sleep": 0.4,
+        "big_spam_alert": 10,
+        "timer_big_spam_alert": 25,
+        "while_normal_deleting_time_sleep": 3,
+        "while_big_spam_deleting_time_sleep": 0.4
+    },
+    "reminders": {
+        "active": true,
+        "manual": {
+            "name": "Reminders",
+            "description": "Sends a message from the reminders file at a specified message interval."
+        },
+        "path_to_reminders": "reminders/reminders.json",
+        "message_interval": 30
+    },
+    "msg_requests": {
+        "active": true,
+        "manual": {
+            "name": "Request Handler",
+            "description": "Interpreter and handler for commands entered by the user in the chat.",
+            "commands": [
+                {
+                    "cmd": "```Sandrita `main command` _specification1_ _specification2_```",
+                    "cmd_description": "Each command consists of a call to Sandrita, followed by the main command to a module (see Sandrita `control` _view_ _modules_) along with its corresponding specifications."
+                }
+            ]
+        },
+        "nicknames": [
+            "sandra",
+            "sandri",
+            "sandru",
+            "sandre",
+            "sandro"
+        ],
+        "content_request_char": "_",
+        "request_char": "`",
+        "path_to_admins": "msg_requests/admins.json",
+        "msg_error_incomplete_request": "Incorrect syntax. Please verify that the command has been entered in the correct order: `main command` _specification1_ _specification2_",
+        "msg_error_bad_request": "The request does not exist. Please check that the `main command` is correct.",
+        "msg_error_void_specification": "A specification is missing. Ensure that the command specifications are complete; some commands require multiple specifications.",
+        "control_panel": {
+            "active": true,
+            "manual": {
+                "name": "Control Panel",
+                "description": "Tools to configure the bot instance in real-time.",
+                "commands": [
+                    {
+                        "cmd": "```Sandrita `control` _view_ _file_```",
+                        "cmd_description": "Allows the viewing of relevant files. Currently supports viewing of ```_modules_``` and ```_configurations_``` files."
+                    },
+                    {
+                        "cmd": "```Sandrita `control` _filter_ _file_ _path, separated, by, commas_```",
+                        "cmd_description": "For a JSON file, filters the content based on the provided path and displays the corresponding fragment. In the path, special characters ```_``` must be replaced with ```-```. Currently, this applies only to ```_configurations_```."
+                    },
+                    {
+                        "cmd": "```Sandrita `control` _modify_ _file_ _path, separated, by, commas_ _variable_```",
+                        "cmd_description": "Sensitive command. For a JSON file, updates the variable at the specified path with the new value. Currently applies only to ```_configurations_```."
+                    },
+                    {
+                        "cmd": "```Sandrita `control` _reboot_ _soft_```",
+                        "cmd_description": "Performs a soft reboot of the WPP Connect instance without stopping the execution of the code."
+                    }
+                ]
+            },
+            "cmd": "control",
+            "sub_cmd_modify": "modify",
+            "msg_sucesfully_modified": "The file has been updated. Note that some changes require a global reboot.",
+            "sub_cmd_filter": "filter",
+            "sub_cmd_view": "view",
+            "sub_cmd_reboot": "reboot",
+            "sub_cmd_soft_reboot": "soft",
+            "sub_cmd_configuration": "configurations",
+            "sub_cmd_modules": "modules",
+            "sub_cmd_api": "api",
+            "about_view": "Here is the value of",
+            "msg_error_file_not_found": "The specified file could not be found. Please verify the file name.",
+            "msg_sucesfully_soft_reboot": "A soft reboot has been executed. Please wait for the system to stabilize.",
+            "path_to_modules": "msg_requests/control_panel/modules.json"
+        },
+        "state": {
+            "active": true,
+            "manual": {
+                "name": "Instance Status",
+                "description": "Displays information from the server and data collected from the information module.",
+                "commands": [
+                    {
+                        "cmd": "```Sandrita `status` ```",
+                        "cmd_description": "If the service indicator is red, resource-intensive operations are being performed. If sustained, system status must be checked from the terminal."
+                    }
+                ]
+            },
+            "cmd": "status",
+            "about_total_messages": "Total messages:",
+            "about_total_cycles": "Total cycles:",
+            "about_total_reboots": "Total reboots:",
+            "about_cpu_usage": "CPU usage:",
+            "about_ram_usage": "RAM usage:",
+            "about_services": "Demanding services:",
+            "number_of_services_to_show": 5,
+            "aditional_msg": "Here is a summary of the system status:"
+        },
+        "manage_reminders": {
+            "active": true,
+            "manual": {
+                "name": "Reminder Manager",
+                "description": "Manages reminders, allowing insertion and deletion.",
+                "commands": [
+                    {
+                        "cmd": "```Sandrita `reminder` _insert_ _reminder_```",
+                        "cmd_description": "Inserts a new reminder into the reminder file."
+                    },
+                    {
+                        "cmd": "```Sandrita `reminder` _delete_ _reminder_```",
+                        "cmd_description": "Deletes a reminder. The reminder must be entered exactly as it appears."
+                    }
+                ]
+            },
+            "cmd": "reminder",
+            "sub_cmd_new_reminder": "insert",
+            "sub_cmd_delete_reminder": "delete",
+            "msg_sucesfully_inserted": "Reminder saved successfully.",
+            "msg_sucesfully_deleted": "Reminder deleted successfully.",
+            "msg_error_repeated_reminder": "This reminder already exists.",
+            "msg_error_reminder_not_found": "The reminder could not be found. Ensure that the reminder is entered exactly as it is displayed."
+        },
+        "man": {
+            "active": true,
+            "cmd": "manual",
+            "manual": {
+                "name": "Manual Lookup",
+                "description": "Displays the manual for the specified module. This is a method to consult the usage of the tool.",
+                "commands": [
+                    {
+                        "cmd": "```Sandrita `manual` _command_```",
+                        "cmd_description": "Provides the name, description, and utilities of a specific module."
+                    }
+                ]
+            },
+            "msg_error_module_not_found": "The specified module could not be found. Please verify the module name."
+        }
+    }
+}
