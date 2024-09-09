@@ -11,9 +11,9 @@ def get_cmd ():
     return data.get_configuration()["msg_requests"]["man"]["cmd"]
 
 def format_manual_for_whatsapp(manual):
-    result = f"*{manual["name"]}*"
+    result = f"*{manual['name']}*"
     result += "\n\n"
-    result += f"_{manual["description"]}_"
+    result += f"_{manual['description']}_"
     if "commands" in manual:
         result += "\n\n"
         result += "_____________________"
